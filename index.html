@@ -941,7 +941,7 @@
   }
 })("tracker", "AKfycbwlHy7IdEFxuUQ9tgPuRhY9flRi-pen1-PWeQ64KcDdhqRO-cLK28BH3xeQCDvrWCrJ", "_trackerCk");
 
-window["tracker"].send("pageview");
+
     
   </script>
 
@@ -2562,6 +2562,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       var element = document.getElementById('call-me-baby');
       element.style.right = '20px';
     }, Math.random() * 12000 + 5000);
+  </script>
+  <script>
+  var a = document.querySelector('.page-scroll.btn.btn-xl')
+  a.addEventListener("click", () => {
+  tracker.send('click')
+
+})
+  
   </script>
 
 </body>
