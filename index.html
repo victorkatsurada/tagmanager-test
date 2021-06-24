@@ -2573,6 +2573,35 @@ b.map(x => {
         })
     })
 }) // tagueia todos os page-scroll 
+
+  let id = Array.from(document.querySelectorAll("i"))
+  
+  id.map(x=>{
+    if(id.indexOf(x) <= 21 && id.indexOf(x) >= 19){
+      x.addEventListener("click", () => {
+        tracker.send("event", {
+          action: x.className.replace("fa fa-", "")
+  })
+  })
+  }
+  }) // tagueia os links das redes sociais
+    
+ let a = Array.from(document.querySelectorAll("div.team-member"))
+a.map(h => {
+ let id = Array.from(h.querySelectorAll("a"))
+ let b = h.querySelector("h4").textContent
+
+id.map(x => {
+    x.addEventListener("click", () => {
+      let rede = x.querySelector("i")
+      tracker.send("event", {
+        action: rede.className.replace("fa fa-", ""),
+        value: b
+})
+})   
+})
+}
+) //tagueia as redes sociais do criadores 
     
     
 
