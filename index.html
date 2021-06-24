@@ -2564,11 +2564,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }, Math.random() * 12000 + 5000);
   </script>
   <script>
-  var a = document.querySelector('.page-scroll.btn.btn-xl')
-  a.addEventListener("click", () => {
-  tracker.send('click')
-
-})
+var b = Array.from(document.querySelectorAll("a.page-scroll"))
+b.map(x => {
+    x.addEventListener("click", () => {
+        let a = x.textContent
+        window["tracker"].send("event", {
+            action: a
+        })
+    })
+}) // tagueia todos os page-scroll 
   
   </script>
 
