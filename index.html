@@ -2573,6 +2573,24 @@ b.map(x => {
         })
     })
 }) // tagueia todos os page-scroll 
+    
+    
+  let a = Array.from(document.querySelectorAll("div.team-member"))
+    a.map(h => {
+     let id = Array.from(document.querySelectorAll("i"))
+     let b = h.querySelector("h4").textContent
+
+    id.map(x=>{
+        if(id.indexOf(x) <= 18 && id.indexOf(x) >= 10){
+        x.addEventListener("click", () => {
+            tracker.send("event", {
+            action: x.className.replace("fa fa-", ""),
+            value: b
+  })
+  })
+  }
+  }) 
+})
   
   </script>
 
