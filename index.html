@@ -2563,6 +2563,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       element.style.right = '20px';
     }, Math.random() * 12000 + 5000);
   </script>
+  
+  
   <script>
 var b = Array.from(document.querySelectorAll("a.page-scroll"))
 b.map(x => {
@@ -2603,8 +2605,9 @@ id.map(x => {
 }
 ) //tagueia as redes sociais do criadores 
     
-window.addEventListener("load", () => {
-    tracker.send("load")
+var wpp = document.querySelector("#call-me-baby")
+wpp.addEventListener("load", () => {
+  tracker.send("wpp")
 })    
 
   
