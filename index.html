@@ -2558,10 +2558,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     })(jQuery); // End of use strict
 
-    window.setTimeout(function() {
+    if(window.setTimeout(function() {
       var element = document.getElementById('call-me-baby');
       element.style.right = '20px';
-    }, Math.random() * 12000 + 5000);
+    }, Math.random() * 12000 + 5000);){
+tracker.send("funcionou")}
+    
+    
   </script>
   
   
