@@ -2565,7 +2565,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 }, time_call)
 
 window.setTimeout(function(){
-  tracker.send("funcionou")
+  tracker.send("event", {
+    category: 'Fale com um atendente',
+    action: "view",
+    label: 'WPP' 
+  })
 },time_call)
     
 
