@@ -2575,29 +2575,72 @@ window.setTimeout(function(){
   
   
   <script>
-var b = Array.from(document.querySelectorAll("a.page-scroll"))
-b.map(x => {
-    x.addEventListener("click", () => {
-        let a = x.textContent
-        window["tracker"].send("event", {
-            action: a
-        })
-    })
-}) // tagueia todos os page-scroll 
+//test to time view
+let queue = []
+let final;
+let unfinal;
 
-  let id = Array.from(document.querySelectorAll("i"))
+window.addEventListener("scroll", (evt) => {
+  queue.push(evt.timeStamp)
+  final = queue.length - 1
+  unfinal = queue.length - 2
+  final_time = queue[final] - queue[unfinal]
+  let s_y = window.scrollY 
   
-  id.map(x=>{
-    if(id.indexOf(x) <= 21 && id.indexOf(x) >= 19){
-      x.addEventListener("click", () => {
+  if (final_time > 3000){
+    if(s_y >= 0 && s_y < 707){ 
+      tracker.send("event", {
+        category: 'header',
+        action: 'view',
+        label: '3 second minimum view',
+        value: final_time
+      }) 
+    }
+    else if(s_y >= 318 && s_y < 1272){
         tracker.send("event", {
-          action: x.className.replace("fa fa-", "")
-  })
-  })
-  }
-  }) // tagueia os links das redes sociais
-    
- let a = Array.from(document.querySelectorAll("div.team-member"))
+            category: 'services',
+            action: 'view',
+            label: '3 second minimum view',
+            value: final_time
+          }) 
+    }
+    else if (s_y >= 1272 && s_y < 2120){
+        tracker.send("event", {
+            category: 'portifolio',
+            action: 'view',
+            label: '3 second minimum view',
+            value: final_time
+          }) 
+    }
+    else if (s_y >= 2120 && s_y < 3551){
+        tracker.send("event", {
+            category: 'about',
+            action: 'view',
+            label: '3 second minimum view',
+            value: final_time
+          }) 
+    }
+    else if (s_y >= 3551 && s_y < 4505){
+        tracker.send("event", {
+            category: 'team',
+            action: 'view',
+            label: '3 second minimum view',
+            value: final_time
+          }) 
+    }
+    else{tracker.send("event", {
+        category: 'contact',
+        action: 'view',
+        label: '3 second minimum view',
+        value: final_time
+      }) }
+}
+else{delete queue}
+
+})
+
+//tagueia  as redes sociais do team
+let a = Array.from(document.querySelectorAll("div.team-member"))
 a.map(h => {
  let id = Array.from(h.querySelectorAll("a"))
  let b = h.querySelector("h4").textContent
@@ -2606,18 +2649,47 @@ id.map(x => {
     x.addEventListener("click", () => {
       let rede = x.querySelector("i")
       tracker.send("event", {
-        action: rede.className.replace("fa fa-", ""),
-        value: b
+        category: 'team',  
+        action: 'click',
+        label: `social midia: ${rede.className.replace("fa fa-", "")} // teammate: ${b}`
 })
 })   
 })
 }
-) //tagueia as redes sociais do criadores 
-    
-var wpp = document.querySelector("#call-me-baby")
-wpp.addEventListener("load", () => {
-  tracker.send("wpp")
-})    
+)
+
+
+// tagueia os links das redes sociais
+let id = Array.from(document.querySelectorAll("i"))
+  
+id.map(x=>{
+  if(id.indexOf(x) <= 21 && id.indexOf(x) >= 19){
+    x.addEventListener("click", () => {
+      tracker.send("event", {
+        category: "footer",
+        action:"click", 
+        label: `social midia: ${x.className.replace("fa fa-", "")}`
+})
+})
+}
+}) 
+
+
+ // tagueia todos os page-scroll 
+var b = Array.from(document.querySelectorAll("a.page-scroll"))
+b.map(x => {
+    x.addEventListener("click", () => {
+        let a = x.href.replace("https://victorkatsurada.github.io/TagTrainer_Pageview/#", "")
+        window["tracker"].send("event", {
+            category: "top menu",
+            action: "click",
+            label: a
+        })
+    })
+})
+
+//tag pageview
+tracker.send("pageview")  
 
   
   </script>
