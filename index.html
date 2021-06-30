@@ -2693,7 +2693,28 @@ b.map(x => {
 })
 
 //tag pageview
-tracker.send("pageview")  
+tracker.send("pageview") 
+    
+    document.querySelector("#contactForm > div > div.col-lg-12.text-center > button").addEventListener("click", evt => {
+  setTimeout(() => {
+  let a = evt.path[3].className
+  a.async === true
+  if(a === 'error'){
+    tracker.send("event", {
+      category: "contact",
+      action: "click",
+      label: "ERRO!"
+    })
+  }else{
+    tracker.send("event", {
+      category: "contact",
+      action: "click",
+      label: "SUCESS"
+        })
+      }
+    }, 1)
+  })
+
 
   
   </script>
