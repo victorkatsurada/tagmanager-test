@@ -2791,6 +2791,11 @@ document.querySelector("#contactForm > div > div.col-lg-12.text-center > button"
   }
     })
     })  
+    
+    //saída da página
+window.addEventListener("close", () => {
+    tracker.send("close")
+})
   </script>
 
 </body>
