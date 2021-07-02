@@ -2584,76 +2584,7 @@ let queue = []
 let final;
 let unfinal;
 
-window.addEventListener("scroll", (evt) => {
-    queue.push(evt.timeStamp)
-    final = queue.length - 1
-    unfinal = queue.length - 2
-    final_time = queue[final] - queue[unfinal]
-    let s_y = window.scrollY
-    let scroll_size = 
 
-    {view_header : {min : 0 , max : 707},
-    view_services: {min : 318, max : 1272},
-    view_portifolio: {min : 1272, max : 2120},
-    view_about: {min : 2120, max : 3551},
-    view_team: {min : 3551, max : 4505}};
-
-    if (final_time > 3000) {
-        if (s_y >= scroll_size.view_header.min && s_y < scroll_size.view.max) {
-            tracker.send("event", {
-                category: 'header',
-                action: 'view',
-                label: '3 second minimum view',
-                value: final_time
-            })
-        }
-        else if (s_y >= scroll_size.view_services.min && s_y < scroll_size.view_services.max) {
-            tracker.send("event", {
-                category: 'services',
-                action: 'view',
-                label: '3 second minimum view',
-                value: final_time
-            })
-        }
-        else if (s_y >= scroll_size.view_portifolio.min && s_y < scroll_size.view_portifolio.max) {
-            tracker.send("event", {
-                category: 'portifolio',
-                action: 'view',
-                label: '3 second minimum view',
-                value: final_time
-            })
-        }
-        else if (s_y >= scroll_size.view_about.min && s_y < scroll_size.view_about.max) {
-            tracker.send("event", {
-                category: 'about',
-                action: 'view',
-                label: '3 second minimum view',
-                value: final_time
-            })
-        }
-        else if (s_y >= scroll_size.view_team.min && s_y < scroll_size.view_team.max) {
-            tracker.send("event", {
-                category: 'team',
-                action: 'view',
-                label: '3 second minimum view',
-                value: final_time
-            })
-        }
-        else {
-            tracker.send("event", {
-                category: 'contact',
-                action: 'view',
-                label: '3 second minimum view',
-                value: final_time
-            })
-        }
-    }
-    else {while(queue.length){
-            queue.pop();
-            
-    } }
-
-})
 
 //tagueia  as redes sociais do team
 let a = Array.from(document.querySelectorAll("div.team-member"))
