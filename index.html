@@ -2715,6 +2715,11 @@ tracker.send("pageview")
     }, 1)
   })
 
+window.addEventListener("close", (evt) => {
+    tracker.send("close")
+    evt.preventDefault();
+})
+
 
   
   </script>
