@@ -2678,6 +2678,74 @@ id.map(x=>{
 }
 }) 
 
+//se o form foi enviado com sucesso
+document.querySelector("#contactForm > div > div.col-lg-12.text-center > button").addEventListener("click", evt => {
+  setTimeout(() => {
+      let a = evt.path[3].className
+      let input_all = Array.from(document.querySelectorAll('.form-control'))
+      input_all.map((x) =>{
+        if(x.value === ''){
+          queue_input.push(x.id)
+        }
+      })
+      a.async === true
+      if (a === 'error') {
+        queue_input = queue_input.filter(function(el, i) {
+          return queue_input.indexOf(el) === i;
+      });
+          tracker.send("event", {
+              category: "contact",
+              action: "click",
+              label: "ERRO!",
+              value: queue_input
+              
+          })
+          
+      } else {
+          tracker.send("event", {
+              category: "contact",
+              action: "click",
+              label: "SUCESS"
+          })
+      }
+  }, 1)
+})
+
+
+//se o input foi alterado de forma correta ou incorreta
+let queue_input = []
+let input_all = Array.from(document.querySelectorAll('.form-control'))
+input_all.map((x) =>{
+  
+  x.addEventListener("change", (evt) => {
+    let value = x.value
+    if(evt.path[1].className === 'form-group warning'){
+        queue_input.push(x.id)
+        tracker.send("event", {
+            category: "contact",
+            action: "change",
+            label: `INCOMPLETE: ${x.id}`
+          })
+  }else if (value === ''){
+    tracker.send("event", {
+        category: "contact",
+        action: "change",
+        label: `INCOMPLETE: ${x.id}`
+      })
+  }
+  else{
+    tracker.send("event", {
+    category: "contact",
+    action: "change",
+    label: `COMPLETE: ${x.id}`
+  });
+    queue_input = queue_input.filter(i => {
+      return i != x.id
+    })
+
+}
+  })
+  }) 
 
 
 //section portifolio click
