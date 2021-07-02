@@ -2695,33 +2695,56 @@ b.map(x => {
 //tag pageview
 tracker.send("pageview") 
     
-    document.querySelector("#contactForm > div > div.col-lg-12.text-center > button").addEventListener("click", evt => {
-  setTimeout(() => {
-  let a = evt.path[3].className
-  a.async === true
-  if(a === 'error'){
-    tracker.send("event", {
-      category: "contact",
-      action: "click",
-      label: "ERRO!"
-    })
-  }else{
-    tracker.send("event", {
-      category: "contact",
-      action: "click",
-      label: "SUCESS"
-        })
-      }
+//se a mensagem é enviada com sucesso ou falha
+document.querySelector("#contactForm > div > div.col-lg-12.text-center > button").addEventListener("click", evt => {
+    setTimeout(() => {
+        let a = evt.path[3].className
+        a.async === true
+        if (a === 'error') {
+            tracker.send("event", {
+                category: "contact",
+                action: "click",
+                label: "ERRO!"
+            })
+        } else {
+            tracker.send("event", {
+                category: "contact",
+                action: "click",
+                label: "SUCESS"
+            })
+        }
     }, 1)
-  })
-
-window.addEventListener("close", (evt) => {
-    tracker.send("close")
-    evt.preventDefault();
 })
 
+//se o input foi alterado de forma correta ou incorreta
+let input_all = Array.from(document.querySelectorAll('.form-control'))
+input_all.map((x) =>{
+  x.addEventListener("change", (evt) => {
+    if(evt.path[1].className === 'form-group success'){
+      tracker.send("event", {
+        category: "contact",
+        action: "change",
+        label: `COMPLETE: ${x.id}`
+      })
+  }else{tracker.send("event", {
+    category: "contact",
+    action: "change",
+    label: `INCOMPLETE: ${x.id}`
+  })}
+})
+})
 
-  
+//section portifolio click
+let port = Array.from(document.getElementsByClassName("portfolio-link"))
+port.map((x) => {
+  x.addEventListener("click", (evt) => {
+    tracker.send("event", {
+        category: "portifolio",
+        action: "click",
+        label: x.href
+    })
+})
+})  
   </script>
 
 </body>
