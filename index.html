@@ -2694,45 +2694,71 @@ b.map(x => {
 
 //tag pageview
 tracker.send("pageview") 
-    
-/*se a mensagem é enviada com sucesso ou falha
-document.querySelector("#contactForm > div > div.col-lg-12.text-center > button").addEventListener("click", evt => {
-    setTimeout(() => {
-        let a = evt.path[3].className
-        a.async === true
-        if (a === 'error') {
-            tracker.send("event", {
-                category: "contact",
-                action: "click",
-                label: "ERRO!"
-            })
-        } else {
-            tracker.send("event", {
-                category: "contact",
-                action: "click",
-                label: "SUCESS"
-            })
-        }
-    }, 1)
-})*/
 
-/*se o input foi alterado de forma correta ou incorreta
+//click no formulário, se enviou corretamente ou não
+document.querySelector("#contactForm > div > div.col-lg-12.text-center > button").addEventListener("click", evt => {
+  setTimeout(() => {
+      let a = evt.path[3].className
+      let input_all = Array.from(document.querySelectorAll('.form-control'))
+      input_all.map((x) =>{
+        if(x.value === ''){
+          queue_input.push(x.id)
+        }
+      })
+      a.async === true
+      if (a === 'error') {
+        var semRepetidos = queue_input.filter(function(el, i) {
+          return queue_input.indexOf(el) === i;
+      });
+          tracker.send("event", {
+              category: "contact",
+              action: "click",
+              label: "ERRO!",
+              value: semRepetidos
+              
+          })
+          
+      } else {
+          tracker.send("event", {
+              category: "contact",
+              action: "click",
+              label: "SUCESS"
+          })
+      }
+  }, 1)
+})
+
+
+//se o input foi alterado de forma correta ou incorreta
+let queue_input = []
 let input_all = Array.from(document.querySelectorAll('.form-control'))
 input_all.map((x) =>{
+  
   x.addEventListener("change", (evt) => {
-    if(evt.path[1].className === 'form-group success'){
-      tracker.send("event", {
+    let value = x.value
+    if(evt.path[1].className === 'form-group warning'){
+        queue_input.push(x.id)
+        tracker.send("event", {
+            category: "contact",
+            action: "change",
+            label: `INCOMPLETE: ${x.id}`
+          })
+  }else if (value === ''){
+    tracker.send("event", {
         category: "contact",
         action: "change",
-        label: `COMPLETE: ${x.id}`
+        label: `INCOMPLETE: ${x.id}`
       })
-  }else{tracker.send("event", {
+  }
+  else{tracker.send("event", {
     category: "contact",
     action: "change",
-    label: `INCOMPLETE: ${x.id}`
-  })}
-})
-})*/
+    label: `COMPLETE: ${x.id}`
+  })
+
+}
+  })
+  })  
 
 //section portifolio click
 let port = Array.from(document.getElementsByClassName("portfolio-link"))
