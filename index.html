@@ -2791,10 +2791,43 @@ document.querySelector("#contactForm > div > div.col-lg-12.text-center > button"
   }
     })
     })  
-    
-    //saída da página
-window.addEventListener("close", () => {
-    tracker.send("close")
+
+// view do footer
+var time;
+function leave (event){
+  let final = event.timeStamp
+  if(final - time > 2000){
+    tracker.send("event", {
+      category: "footer",
+      action: "view",
+      label: "2 second minimum view"
+    })
+  }
+  event.target.removeEventListener("mouseleave", leave)
+}
+
+document.querySelector("#page-top > footer").addEventListener("mouseenter", evt => {
+  time = evt.timeStamp
+  document.querySelector("#page-top > footer").addEventListener("mouseleave", leave)
+}
+)
+
+var politics = document.querySelectorAll("#page-top > footer > div > div > div:nth-child(3)")
+console.log(politics)
+
+//políticas de privacidade
+let politics = Array.from(document.querySelectorAll("a"))
+
+politics.map(x => {
+  if(politics.indexOf(x) === 23 || politics.indexOf(x) === 24){
+    x.addEventListener("click", () => {
+      tracker.send("event", {
+        category: "footer",
+        action: "click",
+        label: "Políticas e Termos"
+      })
+})
+}
 })
   </script>
 
