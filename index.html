@@ -2815,19 +2815,19 @@ document.querySelector("#page-top > footer").addEventListener("mouseenter", evt 
 )
 
 //políticas de privacidade
-/*let politics = Array.from(document.querySelectorAll("a"))
-
+let politics = Array.from(document.querySelectorAll("a"))
 politics.map(x => {
   if(politics.indexOf(x) === 23 || politics.indexOf(x) === 24){
     x.addEventListener("click", () => {
       tracker.send("event", {
         category: "footer",
         action: "click",
-        label: "Políticas e Termos"
+        label: x.textContent
+        
       })
 })
 }
-})*/
+})
   </script>
 
 </body>
