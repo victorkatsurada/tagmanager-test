@@ -2704,7 +2704,9 @@ b.map(x => {
 
 
 //tag pageview
-tracker.send("pageview")
+window.addEventListener("load", () => {
+  tracker.send("pageview")
+})
 
 
 
@@ -2812,11 +2814,8 @@ document.querySelector("#page-top > footer").addEventListener("mouseenter", evt 
 }
 )
 
-var politics = document.querySelectorAll("#page-top > footer > div > div > div:nth-child(3)")
-console.log(politics)
-
 //políticas de privacidade
-let politics = Array.from(document.querySelectorAll("a"))
+/*let politics = Array.from(document.querySelectorAll("a"))
 
 politics.map(x => {
   if(politics.indexOf(x) === 23 || politics.indexOf(x) === 24){
@@ -2828,7 +2827,7 @@ politics.map(x => {
       })
 })
 }
-})
+})*/
   </script>
 
 </body>
